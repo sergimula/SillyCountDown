@@ -1,5 +1,4 @@
 'use client';
-import { useEffect } from "react";
 import { useTheme } from "next-themes";
 
 const SunIcon = () => (
@@ -15,16 +14,8 @@ const MoonIcon = () => (
 )
 
 const ThemeSwitcher = () => {
-    const { theme, setTheme } = useTheme();
-    const isDark = theme === 'dark';
-
-    useEffect(() => {
-        if (isDark) {
-            document.body.classList.add('dark');
-        } else {
-            document.body.classList.remove('dark');
-        }
-    }, [isDark]);
+    const { resolvedTheme, setTheme } = useTheme();
+    const isDark = resolvedTheme === 'dark';
 
     return (
         <button onClick={() => setTheme(isDark ? 'light' : 'dark')} className="absolute top-0 right-0 m-4 p-2 bg-gray-200 dark:bg-gray-800 rounded-xl cursor-pointer">
