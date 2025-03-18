@@ -1,6 +1,8 @@
 'use client';
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
+import Image from 'next/image';
+import image from './image.jpg'
 
 const localeConfig = {
     locale: 'en-US',
@@ -25,11 +27,7 @@ const CountDown = () => {
     useEffect(() => {
         if (remainingTime === null) return;
         if (remainingTime <= 0) {
-            const intervalTimeUp = setInterval(() => {
-                setTheme(theme === 'dark' ? 'light' : 'dark');
-            }, 200);
-
-            return () => clearInterval(intervalTimeUp);
+            setTheme('party')
         }
 
     }, [remainingTime, theme, setTheme]);
@@ -37,7 +35,10 @@ const CountDown = () => {
     if (remainingTime === null) return <div className="flex flex-row content-center gap-1 text-4xl font-bold sm:text-9xl">Loading...</div>;
 
     if (isTimeUp) {
-        return <div className="flex flex-row content-center gap-1 text-4xl font-bold sm:text-9xl text-center">Empiezan las hostias!</div>;
+        return <div className="flex flex-col gap-1 items-center text-4xl font-bold sm:text-9xl text-center">
+            <Image src={image} alt="image" className="w-1/2 h-1/2 mb-8" />
+            <div>Empiezan las hostias!</div>
+        </div>;
     }
 
     const seconds = new Date(remainingTime).getSeconds().toLocaleString(localeConfig.locale, localeConfig.config);

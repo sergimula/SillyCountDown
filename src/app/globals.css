@@ -22,6 +22,47 @@
   }
 }
 
+@keyframes partyanimation {
+  0% {
+    background: var(--color-red-500);
+  }
+
+  14% {
+    background: var(--color-orange-500);
+  }
+
+  28% {
+    background: var(--color-yellow-500);
+  }
+
+  42% {
+    background: var(--color-green-500);
+  }
+
+  56% {
+    background: var(--color-blue-500);
+  }
+
+  70% {
+    background: var(--color-indigo-500);
+  }
+
+  84% {
+    background: var(--color-purple-500);
+  }
+
+  100% {
+    background: var(--color-pink-500);
+  }
+}
+
+.party body {
+  animation: partyanimation 0.5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
