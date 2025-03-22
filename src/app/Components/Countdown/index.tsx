@@ -9,6 +9,10 @@ const localeConfig = {
     config: { minimumIntegerDigits: 2, useGrouping: false }
 }
 const TARGET_TIME = new Date("March 22, 2025 21:30:00");
+const MILISECONDS_IN_A_SECOND = 1000;
+const SECONDS_IN_A_MINUTE = 60;
+const MINUTES_IN_AN_HOUR = 60;
+const HOURS_IN_A_DAY = 24;
 
 const CountDown = () => {
     const { theme, setTheme } = useTheme();
@@ -41,10 +45,10 @@ const CountDown = () => {
         </div>;
     }
 
-    const seconds = new Date(remainingTime).getSeconds().toLocaleString(localeConfig.locale, localeConfig.config);
-    const minutes = new Date(remainingTime).getMinutes().toLocaleString(localeConfig.locale, localeConfig.config);
-    const hours = new Date(remainingTime).getHours().toLocaleString(localeConfig.locale, localeConfig.config);
-    const days = new Date(remainingTime).getDate().toLocaleString(localeConfig.locale, localeConfig.config);
+    const seconds = Math.floor(remainingTime / MILISECONDS_IN_A_SECOND % SECONDS_IN_A_MINUTE).toLocaleString(localeConfig.locale, localeConfig.config);
+    const minutes = Math.floor(remainingTime / (MILISECONDS_IN_A_SECOND * SECONDS_IN_A_MINUTE) % MINUTES_IN_AN_HOUR).toLocaleString(localeConfig.locale, localeConfig.config);
+    const hours = Math.floor(remainingTime / (MILISECONDS_IN_A_SECOND * SECONDS_IN_A_MINUTE * MINUTES_IN_AN_HOUR) % HOURS_IN_A_DAY).toLocaleString(localeConfig.locale, localeConfig.config);
+    const days = Math.floor(remainingTime / (MILISECONDS_IN_A_SECOND * SECONDS_IN_A_MINUTE * MINUTES_IN_AN_HOUR * HOURS_IN_A_DAY)).toLocaleString(localeConfig.locale, localeConfig.config);
 
     return (
         <div className="flex flex-row content-center gap-1 text-4xl font-bold sm:text-9xl">
